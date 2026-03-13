@@ -1,0 +1,56 @@
+[build-system]
+# Build backend declaration. This tells pip how to build/install the package.
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Distribution name. This is the package name pip sees.
+# Hyphens are fine here.
+name = "claudedev-shared"
+
+# Start simple with a manual version.
+version = "0.1.0"
+
+# One-line summary.
+description = "Shared utilities used by multiple PyCharm projects inside ClaudeDev."
+
+# Long description shown on package indexes and useful for documentation.
+readme = "README.md"
+
+# Pick the lowest Python version you want all consumer projects to support.
+requires-python = ">=3.10"
+
+# Replace with your name if you want.
+authors = [
+  { name = "William Martin" },
+]
+
+# Put only real runtime dependencies here.
+# Leave empty until the shared library truly depends on something.
+dependencies = []
+
+[project.optional-dependencies]
+# Tools for developing the shared package itself.
+dev = [
+  "build",
+  "mypy",
+  "pytest",
+  "ruff",
+]
+
+# Smaller optional extra if you only want test tooling.
+test = [
+  "pytest",
+]
+
+[tool.setuptools]
+# Tell setuptools that packages live under src/
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+# Automatically find packages under src/
+where = ["src"]
+
+[tool.pytest.ini_options]
+# Keep pytest focused on the tests folder.
+testpaths = ["tests"]
