@@ -9,4 +9,8 @@ def greet(project_name: str) -> str:
 
 
 def load_ubs_holdings() -> pd.DataFrame:
-    return pd.read_csv(r"C:\Users\wamfo\ClaudeDev\data\UBS_Holdings.csv")
+    df = pd.read_csv(r"C:\Users\wamfo\ClaudeDev\data\UBS_Holdings.csv")
+    df = df[["DESCRIPTION", "SYMBOL", "QUANTITY"]]
+    df = df[df["SYMBOL"].notna()].reset_index(drop=True)
+    df = df[~df["DESCRIPTION"].str.contains("CLOVER", na=False)].reset_index(drop=True)
+    return df

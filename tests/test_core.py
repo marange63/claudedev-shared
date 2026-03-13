@@ -10,5 +10,3 @@ def test_load_ubs_holdings() -> None:
     df = load_ubs_holdings()
     print(df.head)
     i = 0  # breakpoint here
-
-test_load_ubs_holdings()
