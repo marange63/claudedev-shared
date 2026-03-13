@@ -28,7 +28,7 @@ authors = [
 # Put only real runtime dependencies here.
 # Leave empty until the shared library truly depends on something.
 dependencies = [
-  "pandas>=2.0",
+  "pandas>=2.0,<3.0",
 ]
 
 [project.optional-dependencies]
@@ -56,3 +56,4 @@ where = ["src"]
 [tool.pytest.ini_options]
 # Keep pytest focused on the tests folder.
 testpaths = ["tests"]
+addopts = "-s"
