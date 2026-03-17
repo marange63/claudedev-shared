@@ -8,11 +8,20 @@ def greet(project_name: str) -> str:
     return f"Hello from claudedev_shared, {project_name}!"
 
 
+def _parse_currency(series: pd.Series) -> pd.Series:
+    return pd.to_numeric(
+        series.str.replace(r"[$,]", "", regex=True)
+              .str.strip()
+              .str.replace(r"^\((.+)\)$", r"-\1", regex=True),
+        errors="coerce"
+    )
+
+
 def load_raw_ubs_holdings(path: str = r"C:\Users\wamfo\ClaudeDev\data\UBS_Holdings.csv") -> pd.DataFrame:
     df = pd.read_csv(path)
     df = df[["DESCRIPTION", "SYMBOL", "VALUE", "CHANGE IN VALUE"]]
-    df["VALUE"] = pd.to_numeric(df["VALUE"].str.replace(r"[$,]", "", regex=True).str.strip().str.replace(r"^\((.+)\)$", r"-\1", regex=True), errors="coerce")
-    df["CHANGE IN VALUE"] = pd.to_numeric(df["CHANGE IN VALUE"].str.replace(r"[$,]", "", regex=True).str.strip().str.replace(r"^\((.+)\)$", r"-\1", regex=True), errors="coerce")
+    df["VALUE"] = _parse_currency(df["VALUE"])
+    df["CHANGE IN VALUE"] = _parse_currency(df["CHANGE IN VALUE"])
     df["SOD VALUE"] = df["VALUE"] - df["CHANGE IN VALUE"]
     return df
 
