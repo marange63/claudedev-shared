@@ -7,5 +7,6 @@ def test_greet() -> None:
 
 def test_load_ubs_holdings() -> None:
     df = ubs_live_price_holdings()
-    print(df.head)
+    assert not df.empty
+    assert {"DESCRIPTION", "SYMBOL", "SOD VALUE"}.issubset(df.columns)
     i = 0  # breakpoint here
