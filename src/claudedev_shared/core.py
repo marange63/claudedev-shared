@@ -43,6 +43,7 @@ def ubs_live_price_holdings(
     df_tickers = pd.read_csv(tickers_path)
     df = df.merge(df_tickers, on=["DESCRIPTION", "SYMBOL"], how="left")
     df = df.drop(columns=["VALUE"])
+    df['Source'] = "UBS"
     return df
 
 
@@ -66,6 +67,7 @@ def ubs_401k_holdings(
     df = load_raw_ubs_401k()
     df_tickers = pd.read_csv(tickers_path)
     df = df.merge(df_tickers, on=["DESCRIPTION", "SYMBOL"], how="left")
+    df['Source'] = "401K"
     return df
 
 
