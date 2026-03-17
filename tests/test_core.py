@@ -1,5 +1,4 @@
-from claudedev_shared import greet, load_ubs_holdings
-#import claudedev_shared as cd
+from claudedev_shared import greet, load_raw_ubs_holdings
 
 
 def test_greet() -> None:
@@ -7,6 +6,6 @@ def test_greet() -> None:
 
 
 def test_load_ubs_holdings() -> None:
-    df = load_ubs_holdings()
+    df = load_raw_ubs_holdings()
     print(df.head)
     i = 0  # breakpoint here
