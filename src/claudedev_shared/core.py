@@ -41,7 +41,7 @@ def ubs_live_price_holdings(
     df = df[~df["DESCRIPTION"].str.contains(pattern, na=False)].reset_index(drop=True)
     df = df.groupby(["DESCRIPTION", "SYMBOL"], as_index=False)[["VALUE", "SOD VALUE"]].sum()
     df_tickers = pd.read_csv(tickers_path)
-    df = df.merge(df_tickers, on=["DESCRIPTION", "SYMBOL"], how="left")
+    df = df.merge(df_tickers[["SYMBOL", "Ticker Alias", "Tag"]], on="SYMBOL", how="left")
     df = df.drop(columns=["VALUE"])
     df['Source'] = "UBS"
     return df
@@ -66,7 +66,7 @@ def ubs_401k_holdings(
 ) -> pd.DataFrame:
     df = load_raw_ubs_401k()
     df_tickers = pd.read_csv(tickers_path)
-    df = df.merge(df_tickers, on=["DESCRIPTION", "SYMBOL"], how="left")
+    df = df.merge(df_tickers[["SYMBOL", "Ticker Alias", "Tag"]], on="SYMBOL", how="left")
     df['Source'] = "401K"
     return df
 

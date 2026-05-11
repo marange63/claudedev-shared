@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(conda run:*)",
+      "Bash(cd \"C:\\\\Users\\\\wamfo\\\\ClaudeDev\\\\libs\\\\claudedev-shared\" && python -c \"import pandas; print\\(pandas.__version__\\)\")",
+      "Bash(cd \"C:\\\\Users\\\\wamfo\\\\ClaudeDev\\\\libs\\\\claudedev-shared\" && pip install \"pandas<3\")",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
